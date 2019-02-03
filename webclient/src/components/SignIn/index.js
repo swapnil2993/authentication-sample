@@ -4,7 +4,7 @@ import { notify } from 'react-notify-toast';
 import BarLoader from 'react-bar-loader'
 import validate, { clearErrorsForField } from '../../services/validator';
 import { postSignin } from '../../services/user';
-import { setItemToStorage } from '../../services/storage';
+import { setItemToStorage, getItemFromStorage } from '../../services/storage';
 import config from './validationConfig';
 import './style.css';
 
@@ -16,6 +16,12 @@ class SignIn extends Component {
       password: '',
       isLoading: false,
       errors: {}
+    }
+  }
+
+  componentDidMount() {
+    if (getItemFromStorage('access-token')) {
+      this.props.history.replace('/');
     }
   }
 

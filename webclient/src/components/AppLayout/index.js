@@ -22,7 +22,7 @@ class AppLayout extends Component {
             <AuthenticatedRoute path="/" component={Home} exact />
             <Route path="/registration" component={Registration} exact />
             <Route path="/resend-verification-link" component={ResendVerificationLink} exact />
-            <Route path="/verify/:token?" component={VerifyLink} />
+            <Route path="/verify/:token?" component={VerifyLink} exact />
             <Redirect to="/signin" from="/" exact={true} />
             <Route path="*" component={NotFound} />
           </Switch>
