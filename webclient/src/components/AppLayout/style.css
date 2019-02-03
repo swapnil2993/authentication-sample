@@ -1,0 +1,39 @@
+.avatar {
+  vertical-align: middle;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.form-control {
+  float: left;
+}
+
+.form-group-label {
+  float: left;
+  font-weight: 400;
+  margin: 8px 0px 8px 0px;
+}
+
+.form-check-label {
+  overflow: auto;
+  padding-left: 2px;
+}
+
+.form-check-inline {
+  float: left;
+}
+
+.form-row {
+  float: left;
+}
+
+button {
+  margin: 15px 0px 15px 0px;
+  background-color: #64C8C5;
+}
+
+.form-control {
+  background-color: #F4F4F4;
+}
