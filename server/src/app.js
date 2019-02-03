@@ -14,7 +14,7 @@ app.disable('x-powered-by');
 app.set('view-engine', 'jade');
 
 DbConnect.connect();
-app.use(express.static(path.join(__dirname, '../../client/build')));
+app.use(express.static(path.join(__dirname, '../../webclient/build')));
 app.use(cors());
 app.options('*', cors());
 app.use(Middlewares.configuration);
@@ -24,7 +24,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '../../client/build/index.html'));
+  res.sendFile(path.join(__dirname + '../../webclient/build/index.html'));
 });
 
 module.exports = app;
