@@ -6,6 +6,7 @@ class DbConnect {
   static mongooseConnection;
 
   static connect() {
+    console.log("MOngo", process.env.DB_CONNECTION_STRING);
     const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING;
     DbConnect.mongooseConnection = Mongoose.connection;
 
