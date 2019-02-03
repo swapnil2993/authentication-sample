@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { notify } from 'react-notify-toast';
-import BarLoader from 'react-bar-loader'
+import BarLoader from 'react-bar-loader';
 import { postResendVerifyEmail } from '../../services/user';
 import validate, { clearErrorsForField } from '../../services/validator';
 
