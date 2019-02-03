@@ -56,9 +56,7 @@ const setAuthHeadersInInterceptors = (config) => {
   return config;
 }
 
-
 export const setupInterceptor = () => {
-  console.log("setupInterceptor")
   instance.interceptors.response.use(
     (response) => response,
     (error) => handleErrors(error),
