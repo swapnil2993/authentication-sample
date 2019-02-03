@@ -14,7 +14,7 @@ class Middleware {
       limit: 1024 * 1024 * 30
     }));
     app.use(expressValidator());
-    app.use(new BaseRoutes().routes);
+    app.use('/api',new BaseRoutes().routes);
     return app;
   }
 }
