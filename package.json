@@ -9,7 +9,7 @@
   "scripts": {
     "heroku-prebuild": "npm install",
     "start": "node -r dotenv/config ./node_modules/.bin/nodemon --exec babel-node ./src/bin/www",
-    "heroku-postbuild": "cd ../webclient && npm install && npm run build"
+    "heroku-postbuild": "cd webclient && npm install && npm run build"
   },
   "dependencies": {
     "@sendgrid/mail": "^6.3.1",
