@@ -2,7 +2,12 @@
   "name": "backend-server",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": "11.0.0",
+    "npm": "6.x"
+  },
   "scripts": {
+    "heroku-prebuild": "npm install",
     "start": "node -r dotenv/config ./node_modules/.bin/nodemon --exec babel-node ./src/bin/www",
     "heroku-postbuild": "cd ../webclient && npm install && npm run build"
   },
