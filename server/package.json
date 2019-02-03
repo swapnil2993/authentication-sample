@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node -r dotenv/config ./node_modules/.bin/nodemon --exec babel-node ./src/bin/www"
+    "start": "node -r dotenv/config ./node_modules/.bin/nodemon --exec babel-node ./src/bin/www",
+    "heroku-postbuild": "cd ../webclient && npm install && npm run build"
   },
   "dependencies": {
     "@sendgrid/mail": "^6.3.1",
