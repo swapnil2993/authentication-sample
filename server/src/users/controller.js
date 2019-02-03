@@ -52,11 +52,16 @@ class UserController {
         const userObject = user.toJSON();
 
         if (isPasswordValid) {
+          if (!userObject.isVerified) {
+            const data = { email: userObject.email, id: userObject._id, isVerified: userObject.isVerified }
+            return res.status(403).json({ message: "Please verify email inorder to use our services", data })
+          }
+
           userObject.token = await new TokenController().createToken({ id: userObject._id, email: userObject.email });
-          return res.json({ message: "Login Successful", data: userObject })
+          return res.status(200).json({ message: "Login Successful", data: userObject })
         }
       }
-      return res.json({ message: 'Invalid Credentials. Please try again' });
+      return res.status(400).json({ message: 'Invalid Credentials. Please try again' });
     } catch (error) {
       return res.json({ message: error.message })
     }

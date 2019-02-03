@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { notify } from 'react-notify-toast';
 import validate, { clearErrorsForField } from '../../services/validator';
 import { postSignin } from '../../services/user';
+import { setItemToStorage } from '../../services/storage';
 import config from './validationConfig';
 import './style.css';
 
@@ -15,20 +16,39 @@ class SignIn extends Component {
       errors: {}
     }
   }
+
   onFormValidationSuccess = () => {
     let { email, password } = this.state;
 
     const user = { email, password };
 
     postSignin(user).then((response) => {
-      if (response.status === 200) {
+      const { status } = response;
+      if (status === 200) {
         notify.show(response.data.message, 'success');
+        setItemToStorage('access-token', response.data.data.token)
+        this.props.history.replace('/');
+      }
+    }).catch((errors) => {
+      const { response } = errors;
+      if (response && response.data) {
+        notify.show(response.data.message, 'error');
+        if (!response.data.isVerified) {
+          this.props.history.push(`/resend-verification-link?email=${response.data.data.email}`)
+        }
       }
     })
   }
 
   onFormValidationFailure = (errors) => {
     this.setState({ errors });
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value.trim(),
+      errors: clearErrorsForField(this.state.errors, e.target.name)
+    });
   }
 
   handleSubmit = (e) => {
@@ -45,34 +65,34 @@ class SignIn extends Component {
 
   render() {
     return (
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-5 col-md-offset-4 col-lg-4 col-lg-offset-4">
-            <div class="panel panel-default box-signin-shadow">
-              <div class="panel-heading">
-                <span class="text-primary">Sign In</span>
-                <span class="text-muted pull-right today" title="Today"></span>
+      <div className="container">
+        <div className="row">
+          <div className="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-5 col-md-offset-4 col-lg-4 col-lg-offset-4">
+            <div className="panel panel-default box-signin-shadow">
+              <div className="panel-heading">
+                <span className="text-primary">Sign In</span>
+                <span className="text-muted pull-right today" title="Today"></span>
               </div>
-              <div class="panel-body">
+              <div className="panel-body">
                 <form>
                   <div className="form-group">
                     <label className="form-group-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" onChange={this.handleChange} />
+                    <input type="email" className="form-control" id="email" name="email" onChange={this.handleChange} />
                     <span className="validn " style={{ color: "red" }}>{this.state.errors["email"]}</span>
                   </div>
                   <div className="clearfix"></div>
 
                   <div className="form-group">
                     <label className="form-group-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" onChange={this.handleChange} />
+                    <input type="password" className="form-control" id="password" name="password" onChange={this.handleChange} />
                     <span className="validn " style={{ color: "red" }}>{this.state.errors["password"]}</span>
                   </div>
 
-                  <button class="btn btn-block btn-primary" onClick={this.handleSubmit} tabindex="3">Sign In</button>
-                  <p class="text-center text-muted h4">
+                  <button className="btn btn-block btn-primary" onClick={this.handleSubmit} tabIndex="3">Sign In</button>
+                  <p className="text-center text-muted h4">
                     or
             </p>
-                  <Link to="/registration" class="btn btn-block btn-success" tabindex="5">Create account</Link>
+                  <Link to="/registration" className="btn btn-block btn-success" tabIndex="5">Create account</Link>
                 </form>
               </div>
             </div>

@@ -10,7 +10,7 @@ axios.defaults.validateStatus = (status) => status >= 200 && status < 300;
 
 const instance = axios.create();
 
-const handleErrors = (store, error) => {
+const handleErrors = (error) => {
   if (process.env.NODE_ENV === 'development') {
     // eslint-disable-next-line no-console
     console.log('Error Logging :: ', error.message, JSON.stringify(error));
@@ -35,9 +35,9 @@ const handleErrors = (store, error) => {
         break;
       case (401):
         clearDefaultStorage();
-        // store.dispatch(showToaster({ message: 'Session Expired. Please login again.' }));
-        // store.dispatch(replace(SIGN_IN_URL));
         break;
+      case (403):
+        return Promise.reject(error);
       case (500):
         notify.show(error.message || errorMessage, 'error');
         break;
@@ -57,10 +57,11 @@ const setAuthHeadersInInterceptors = (config) => {
 }
 
 
-export const setupInterceptor = (store) => {
+export const setupInterceptor = () => {
+  console.log("setupInterceptor")
   instance.interceptors.response.use(
     (response) => response,
-    (error) => handleErrors(store, error),
+    (error) => handleErrors(error),
   );
 
   instance.interceptors.request.use(

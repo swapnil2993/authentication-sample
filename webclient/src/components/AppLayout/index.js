@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Notifications from 'react-notify-toast';
 import Registration from '../Registration';
+import AuthenticatedRoute from './AuthenticatedRoute';
 import NotFound from '../NotFound';
-import Successfull from '../Successfull';
+import Home from '../Home';
 import SignIn from '../SignIn';
-import VerifyEmail from '../VerifyEmail'
+import ResendVerificationLink from '../ResendVerificationLink'
+import VerifyLink from '../VerifyLink'
+
 import './style.css';
 
 class AppLayout extends Component {
@@ -16,9 +19,10 @@ class AppLayout extends Component {
           <Notifications />
           <Switch>
             <Route path="/signin" component={SignIn} exact={true} />
-            <Route path="/registration" component={Registration} exact={true} />
-            <Route path="/successfull" component={Successfull} exact={true} />
-            <Route path="/verify-email" component={VerifyEmail} exact={true} />
+            <AuthenticatedRoute path="/" component={Home} exact />
+            <Route path="/registration" component={Registration} exact />
+            <Route path="/resend-verification-link" component={ResendVerificationLink} exact />
+            <Route path="/verify/:token?" component={VerifyLink} />
             <Redirect to="/signin" from="/" exact={true} />
             <Route path="*" component={NotFound} />
           </Switch>

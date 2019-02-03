@@ -3,7 +3,7 @@ import sgMail from '@sendgrid/mail';
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-const BASE_URL = process.env.SERVER_URL;
+const BASE_URL = process.env.CLIENT_URL;
 
 const defaultMailOptions = {
   from: process.env.MAIL_OPTIONS_FROM,
