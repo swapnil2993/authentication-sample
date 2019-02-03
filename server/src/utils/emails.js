@@ -3,6 +3,8 @@ import sgMail from '@sendgrid/mail';
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+const BASE_URL = process.env.SERVER_URL;
+
 const defaultMailOptions = {
   from: process.env.MAIL_OPTIONS_FROM,
   to: 'swap@yopmail.com',
@@ -11,7 +13,7 @@ const defaultMailOptions = {
 };
 
 export function verifyEmailTemplate(token) {
-  const link = `http://localhost:3001/verify/${token}`
+  const link = `${BASE_URL}/verify/${token}`
   return `<html>
     <body>
       <h4>Thanks for joining our free community.</h4><br/><br/>
@@ -24,7 +26,8 @@ export function verifyEmailTemplate(token) {
 }
 
 export function resendEmailVerificationTemplate(token) {
-  const link = `http://localhost:3001/verify/${token}`
+
+  const link = `${BASE_URL}/verify/${token}`
   return `<html>
     <body>
       Please confirm your email by confirming your emailId.<br/>

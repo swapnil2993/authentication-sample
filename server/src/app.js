@@ -1,6 +1,3 @@
-// import dotenv from 'dotenv';
-// dotenv.config();
-console.log(process.env)
 import createError from 'http-errors';
 import express from 'express';
 import helmet from 'helmet';

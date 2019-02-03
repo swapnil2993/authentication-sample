@@ -50,7 +50,6 @@ class UserController {
       if (user) {
         const isPasswordValid = await user.validatePassword(password);
         const userObject = user.toJSON();
-        delete userObject.deletedAt;
 
         if (isPasswordValid) {
           userObject.token = await new TokenController().createToken({ id: userObject._id, email: userObject.email });
