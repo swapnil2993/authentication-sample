@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
-    "bootstrap": "^3.4.0",
+    "bootstrap": "^3.4.1",
     "lodash": "^4.17.11",
     "react": "16.6.0",
     "react-bar-loader": "^1.0.0",
