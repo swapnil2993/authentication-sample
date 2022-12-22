@@ -23,7 +23,7 @@
     "express-validator": "^5.3.1",
     "helmet": "^3.15.0",
     "http-errors": "^1.6.3",
-    "jsonwebtoken": "^8.4.0",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.4.9",
     "nodemon": "^1.18.9"
   },
